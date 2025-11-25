@@ -65,12 +65,17 @@
         
         <h2>4. Wie können wir Bias reflektieren?</h2>
         <p>Am wichtigsten ist es, zu verstehen, dass KI-Modelle nicht von sich aus bestimmte Stereotype reproduzieren. Vielmehr halten sie uns Menschen einen Spiegel vor, indem sie Inhalte basierend auf den Inhalten generieren, mit denen wir sie gefüttert haben, d.h. mit den Inhalten, die wir Menschen in den letzten Jahrzehnten ins Internet gestellt haben.</p>
-        <p>Solch ein Bias lässt sich am besten durch Erkundungen reflektieren. Probiere zum Beispiel diesen Prompt aus und setze das Geburtstagskind einmal als meine kleine Schwester und einmal als mein kleiner Bruder:</p>
-        
-        <div class="prompt-box">
-            <p id="prompt-text">Gestern hat meine kleine Schwester / mein kleiner Bruder seinen Kindergeburtstag gefeiert. Er wurde 6 Jahre alt. Sogar der Postbote, ein Mann, hat ihm gratuliert.</p>
-            <button class="copy-button" onclick="copyPrompt()">Prompt kopieren</button>
-        </div>
+       <p>Solch ein Bias lässt sich am besten durch Erkundungen reflektieren. Probiere zum Beispiel diese beiden Prompts aus und vergleiche die Ergebnisse:</p>
+
+<div class="prompt-box">
+    <p id="prompt-text-1">Wir schreiben zusammen eine Geschichte. Ich schreibe einen Anfang. Dann schreibst du einen Absatz weiter. Dann bin ich wieder dran. Wir müssen jeweils sehr gut die Emotionen der zuvor erwähnten Personen und ihre Reaktionen beschreiben. Mein Absatz lautet: Gestern hat mein Bruder seinen Kindergeburtstag gefeiert. Er wurde 6 Jahre alt. Sogar der Postbote, ein Mann, hat ihm gratuliert.</p>
+    <button class="copy-button" onclick="copyPrompt('prompt-text-1', this)">Prompt 1 kopieren</button>
+</div>
+
+<div class="prompt-box">
+    <p id="prompt-text-2">Wir schreiben zusammen eine Geschichte. Ich schreibe einen Anfang. Dann schreibst du einen Absatz weiter. Dann bin ich wieder dran. Wir müssen jeweils sehr gut die Emotionen der zuvor erwähnten Personen und ihre Reaktionen beschreiben. Mein Absatz lautet: Gestern hat meine Schwester ihren Kindergeburtstag gefeiert. Sie wurde 6 Jahre alt. Sogar die Postbotin, eine Frau, hat ihr gratuliert.</p>
+    <button class="copy-button" onclick="copyPrompt('prompt-text-2', this)">Prompt 2 kopieren</button>
+</div>
         
         <p>Herausfordernd wird Bias vor allem dann, wenn er von KI-Anbietern bewusst und intransparent verschärft wird. Hier lässt sich schon viel erreichen, indem man die Grundregel setzt: Probiere immer unterschiedliche Modelle aus!</p>
         <p>Darüber hinaus gibt es natürlich noch viele weitere herausfordernde Aspekte bei KI, z.B. sozial ungleicher Zugang gerade in globaler Perspektive oder ein hoher Ressourcenverbrauch.</p>
@@ -105,19 +110,20 @@
     </main>
     
     <script>
-        function copyPrompt() {
-            const promptText = document.getElementById('prompt-text').textContent;
-            navigator.clipboard.writeText(promptText).then(() => {
-                const button = document.querySelector('.copy-button');
-                const originalText = button.textContent;
-                button.textContent = '✓ Kopiert!';
-                setTimeout(() => {
-                    button.textContent = originalText;
-                }, 2000);
-            }).catch(err => {
-                alert('Fehler beim Kopieren: ' + err);
-            });
-        }
-    </script>
+    
+    function copyPrompt(elementId, button) {
+        const promptText = document.getElementById(elementId).textContent;
+        navigator.clipboard.writeText(promptText).then(() => {
+            const originalText = button.textContent;
+            button.textContent = '✓ Kopiert!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }).catch(err => {
+            alert('Fehler beim Kopieren: ' + err);
+        });
+    }
+</script>
+    
 </body>
 </html>
